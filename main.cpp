@@ -11,43 +11,43 @@ using namespace std;
 
 class ComputerClub
 {
-	struct Event // структура события
+	struct Event // Г±ГІГ°ГіГЄГІГіГ°Г  Г±Г®ГЎГ»ГІГЁГї
 	{
-		string time; // время события
-		int id; //id ситуации
-		string name; // имя клиента
+		string time; // ГўГ°ГҐГ¬Гї Г±Г®ГЎГ»ГІГЁГї
+		int id; //id Г±ГЁГІГіГ Г¶ГЁГЁ
+		string name; // ГЁГ¬Гї ГЄГ«ГЁГҐГ­ГІГ 
 	};
 
 	struct Table
 	{
-		string entryTime = ""; // время посадки за стол
+		string entryTime = ""; // ГўГ°ГҐГ¬Гї ГЇГ®Г±Г Г¤ГЄГЁ Г§Г  Г±ГІГ®Г«
 		int entryHour = 0;
 		int entryMinute = 0;
-		string exitTime = ""; // время высадки из-за стола
+		string exitTime = ""; // ГўГ°ГҐГ¬Гї ГўГ»Г±Г Г¤ГЄГЁ ГЁГ§-Г§Г  Г±ГІГ®Г«Г 
 		int exitHour = 0;
 		int exitMinute = 0;
 		int entryTotalMinute = 0; 
 		int exitTotalMinute = 0;
 	};
 
-	unordered_map <int, int> moneyTables; // выручка столов
-	unordered_map <int, int> timeTables; // время за столом
+	unordered_map <int, int> moneyTables; // ГўГ»Г°ГіГ·ГЄГ  Г±ГІГ®Г«Г®Гў
+	unordered_map <int, int> timeTables; // ГўГ°ГҐГ¬Гї Г§Г  Г±ГІГ®Г«Г®Г¬
 
-	int tableNumber; // текущий номер стола
-	int numTables; // количество столов
-	string startTime; // время начала работы
-	string endTime; // время конца работы
-	int price; // стоимость стола в час
-	ifstream file; // рабочий файл с событиями
-	unordered_set <string> names; // список находящихся в клубе клиентов
-	unordered_map <int, bool> tables; // список столов
-	unordered_map <string, int> namesTables; // список гостей за столами
-	queue <string> queClients; // очередь из клиентов
+	int tableNumber; // ГІГҐГЄГіГ№ГЁГ© Г­Г®Г¬ГҐГ° Г±ГІГ®Г«Г 
+	int numTables; // ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ® Г±ГІГ®Г«Г®Гў
+	string startTime; // ГўГ°ГҐГ¬Гї Г­Г Г·Г Г«Г  Г°Г ГЎГ®ГІГ»
+	string endTime; // ГўГ°ГҐГ¬Гї ГЄГ®Г­Г¶Г  Г°Г ГЎГ®ГІГ»
+	int price; // Г±ГІГ®ГЁГ¬Г®Г±ГІГј Г±ГІГ®Г«Г  Гў Г·Г Г±
+	ifstream file; // Г°Г ГЎГ®Г·ГЁГ© ГґГ Г©Г« Г± Г±Г®ГЎГ»ГІГЁГїГ¬ГЁ
+	unordered_set <string> names; // Г±ГЇГЁГ±Г®ГЄ Г­Г ГµГ®Г¤ГїГ№ГЁГµГ±Гї Гў ГЄГ«ГіГЎГҐ ГЄГ«ГЁГҐГ­ГІГ®Гў
+	unordered_map <int, bool> tables; // Г±ГЇГЁГ±Г®ГЄ Г±ГІГ®Г«Г®Гў
+	unordered_map <string, int> namesTables; // Г±ГЇГЁГ±Г®ГЄ ГЈГ®Г±ГІГҐГ© Г§Г  Г±ГІГ®Г«Г Г¬ГЁ
+	queue <string> queClients; // Г®Г·ГҐГ°ГҐГ¤Гј ГЁГ§ ГЄГ«ГЁГҐГ­ГІГ®Гў
 
 public:
-	ComputerClub(){} // конструктор по умолчанию
+	ComputerClub(){} // ГЄГ®Г­Г±ГІГ°ГіГЄГІГ®Г° ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
 
-	void convertTimeFormat(const string& time, int& hours, int& minutes); // функция преобразования формата времени ХХ:ХХ в часы и минуты
+	void convertTimeFormat(const string& time, int& hours, int& minutes); // ГґГіГ­ГЄГ¶ГЁГї ГЇГ°ГҐГ®ГЎГ°Г Г§Г®ГўГ Г­ГЁГї ГґГ®Г°Г¬Г ГІГ  ГўГ°ГҐГ¬ГҐГ­ГЁ Г•Г•:Г•Г• Гў Г·Г Г±Г» ГЁ Г¬ГЁГ­ГіГІГ»
 	void displayEventInfo(const Event& event);
 	void GetValue(const string& filename);	
 	bool isValidTimeFormat(const string& time);
@@ -56,20 +56,20 @@ public:
 
 bool ComputerClub::isValidTimeFormat(const string& time)
 {
-	// Формат времени ЧЧ:ММ имеет длину 5 символов и разделен двоеточием.
+	// Г”Г®Г°Г¬Г ГІ ГўГ°ГҐГ¬ГҐГ­ГЁ Г—Г—:ГЊГЊ ГЁГ¬ГҐГҐГІ Г¤Г«ГЁГ­Гі 5 Г±ГЁГ¬ГўГ®Г«Г®Гў ГЁ Г°Г Г§Г¤ГҐГ«ГҐГ­ Г¤ГўГ®ГҐГІГ®Г·ГЁГҐГ¬.
 	if (time.length() != 5 || time[2] != ':')
 		return false;
 
-	// Проверяем, что все символы до и после двоеточия являются цифрами.
+	// ГЏГ°Г®ГўГҐГ°ГїГҐГ¬, Г·ГІГ® ГўГ±ГҐ Г±ГЁГ¬ГўГ®Г«Г» Г¤Г® ГЁ ГЇГ®Г±Г«ГҐ Г¤ГўГ®ГҐГІГ®Г·ГЁГї ГїГўГ«ГїГѕГІГ±Гї Г¶ГЁГґГ°Г Г¬ГЁ.
 	for (int i = 0; i < 5; ++i)
 	{
 		if (i == 2)
-			continue; // Пропускаем символ двоеточия
+			continue; // ГЏГ°Г®ГЇГіГ±ГЄГ ГҐГ¬ Г±ГЁГ¬ГўГ®Г« Г¤ГўГ®ГҐГІГ®Г·ГЁГї
 		if (!isdigit(time[i]))
 			return false;
 	}
 
-	// Проверяем, что значения часов и минут находятся в разумных пределах.
+	// ГЏГ°Г®ГўГҐГ°ГїГҐГ¬, Г·ГІГ® Г§Г­Г Г·ГҐГ­ГЁГї Г·Г Г±Г®Гў ГЁ Г¬ГЁГ­ГіГІ Г­Г ГµГ®Г¤ГїГІГ±Гї Гў Г°Г Г§ГіГ¬Г­Г»Гµ ГЇГ°ГҐГ¤ГҐГ«Г Гµ.
 	int hours = stoi(time.substr(0, 2));
 	int minutes = stoi(time.substr(3, 2));
 	if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59)
@@ -81,16 +81,16 @@ bool ComputerClub::isValidTimeFormat(const string& time)
 void ComputerClub:: GetValue(const string& filename)
 {
 	file.open(filename);
-	if (!file.is_open())  // проверка открытия файла
+	if (!file.is_open())  // ГЇГ°Г®ГўГҐГ°ГЄГ  Г®ГІГЄГ°Г»ГІГЁГї ГґГ Г©Г«Г 
 	{
 		cout << "Error: Cannot open file " << filename << endl;
 		return;
 	}
 
-	file >> numTables >> startTime >> endTime >> price; // заносим начальные данные в переменные
-	cout << startTime << endl; // вывод времени начала работы
+	file >> numTables >> startTime >> endTime >> price; // Г§Г Г­Г®Г±ГЁГ¬ Г­Г Г·Г Г«ГјГ­Г»ГҐ Г¤Г Г­Г­Г»ГҐ Гў ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ
+	cout << startTime << endl; // ГўГ»ГўГ®Г¤ ГўГ°ГҐГ¬ГҐГ­ГЁ Г­Г Г·Г Г«Г  Г°Г ГЎГ®ГІГ»
 
-	// заполняем map количеством столов (изначально все свободны)
+	// Г§Г ГЇГ®Г«Г­ГїГҐГ¬ map ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГ®Г¬ Г±ГІГ®Г«Г®Гў (ГЁГ§Г­Г Г·Г Г«ГјГ­Г® ГўГ±ГҐ Г±ГўГ®ГЎГ®Г¤Г­Г»)
 	for (int i = 0; i < numTables; ++i)
 	{
 		tables.insert({ i,false });
@@ -99,7 +99,7 @@ void ComputerClub:: GetValue(const string& filename)
 	}
 
 	int startHour, startMinute, endHour, endMinute;
-	// переводим часы и минуты в удобный формат
+	// ГЇГҐГ°ГҐГўГ®Г¤ГЁГ¬ Г·Г Г±Г» ГЁ Г¬ГЁГ­ГіГІГ» Гў ГіГ¤Г®ГЎГ­Г»Г© ГґГ®Г°Г¬Г ГІ
 	convertTimeFormat(startTime, startHour, startMinute);
 	convertTimeFormat(endTime, endHour, endMinute);
 	
@@ -119,18 +119,18 @@ void ComputerClub:: GetValue(const string& filename)
 		switch (event.id)
 		{
 		case 1:
-			// находится ли клиент в клубе
+			// Г­Г ГµГ®Г¤ГЁГІГ±Гї Г«ГЁ ГЄГ«ГЁГҐГ­ГІ Гў ГЄГ«ГіГЎГҐ
 			if (nm != names.end())
 			{
 				cout << endl << "13 YouShallNotPass";
 			}
-			// открыт ли клуб
+			// Г®ГІГЄГ°Г»ГІ Г«ГЁ ГЄГ«ГіГЎ
 			else if (currentHour < startHour || currentHour >= endHour)
 			{
 				firstClientBeforeOpening = true;
 				cout << endl << event.time << " 13 NotOpenYet";
 			}
-			// заносим клиента в список посетителей
+			// Г§Г Г­Г®Г±ГЁГ¬ ГЄГ«ГЁГҐГ­ГІГ  Гў Г±ГЇГЁГ±Г®ГЄ ГЇГ®Г±ГҐГІГЁГІГҐГ«ГҐГ©
 			else
 			{
 				firstClientBeforeOpening = false;
@@ -140,25 +140,25 @@ void ComputerClub:: GetValue(const string& filename)
 		case 2:
 			file >> tableNumber;
 			cout << " " << tableNumber;
-			// находится ли клиент в клубе
+			// Г­Г ГµГ®Г¤ГЁГІГ±Гї Г«ГЁ ГЄГ«ГЁГҐГ­ГІ Гў ГЄГ«ГіГЎГҐ
 			if (nm == names.end())
 			{
 				cout << endl << " 13 ClientUnknown";
 			}
-			// занят ли стол по номеру tableNumber
+			// Г§Г Г­ГїГІ Г«ГЁ Г±ГІГ®Г« ГЇГ® Г­Г®Г¬ГҐГ°Гі tableNumber
 			else if (tables[tableNumber])
 			{
 				cout << endl << event.time << " 13 PlaceIsBusy";
 				queClients.push(event.name);
 			}
-			// если стол свободен 
+			// ГҐГ±Г«ГЁ Г±ГІГ®Г« Г±ГўГ®ГЎГ®Г¤ГҐГ­ 
 			else
 			{
-				// отмечаем стол как занятый
+				// Г®ГІГ¬ГҐГ·Г ГҐГ¬ Г±ГІГ®Г« ГЄГ ГЄ Г§Г Г­ГїГІГ»Г©
 				tables[tableNumber] = true;
 				namesTables.insert({ event.name,tableNumber });
 
-				// вносим время начала брони стола 
+				// ГўГ­Г®Г±ГЁГ¬ ГўГ°ГҐГ¬Гї Г­Г Г·Г Г«Г  ГЎГ°Г®Г­ГЁ Г±ГІГ®Г«Г  
 				table[tableNumber - 1].entryTime = event.time;
 				convertTimeFormat(table[tableNumber - 1].entryTime, table[tableNumber - 1].entryHour, table[tableNumber - 1].entryMinute);
 				table[tableNumber - 1].entryTotalMinute = table[tableNumber - 1].entryHour * 60 + table[tableNumber - 1].entryMinute;
@@ -181,26 +181,26 @@ void ComputerClub:: GetValue(const string& filename)
 			}
 			break;
 		case 4:
-			// находится ли клиент в клубе
+			// Г­Г ГµГ®Г¤ГЁГІГ±Гї Г«ГЁ ГЄГ«ГЁГҐГ­ГІ Гў ГЄГ«ГіГЎГҐ
 			if (nm == names.end())
 			{
 				cout << endl << " 13 ClientUnknown";
 			}
 			else
 			{
-				// освобождение стола, за которым сидел клиент	
+				// Г®Г±ГўГ®ГЎГ®Г¦Г¤ГҐГ­ГЁГҐ Г±ГІГ®Г«Г , Г§Г  ГЄГ®ГІГ®Г°Г»Г¬ Г±ГЁГ¤ГҐГ« ГЄГ«ГЁГҐГ­ГІ	
 				tableNumber = namesTables[event.name];
 				tables[tableNumber] = false;
 				
-				// вносим время конца брони стола
+				// ГўГ­Г®Г±ГЁГ¬ ГўГ°ГҐГ¬Гї ГЄГ®Г­Г¶Г  ГЎГ°Г®Г­ГЁ Г±ГІГ®Г«Г 
 				table[tableNumber-1].exitTime = event.time;
 				convertTimeFormat(table[tableNumber - 1].exitTime, table[tableNumber - 1].exitHour, table[tableNumber - 1].exitMinute);
 				table[tableNumber - 1].exitTotalMinute = table[tableNumber - 1].exitHour * 60 + table[tableNumber - 1].exitMinute;
-				// подсчет выручки и времени 
+				// ГЇГ®Г¤Г±Г·ГҐГІ ГўГ»Г°ГіГ·ГЄГЁ ГЁ ГўГ°ГҐГ¬ГҐГ­ГЁ 
 				moneyTables[tableNumber] += (ceil(static_cast<double>(table[tableNumber - 1].exitTotalMinute - table[tableNumber - 1].entryTotalMinute) / 60.0)) * price;
 				timeTables[tableNumber] += table[tableNumber - 1].exitTotalMinute - table[tableNumber - 1].entryTotalMinute;
 
-				// удаление клиента из списка посетителей
+				// ГіГ¤Г Г«ГҐГ­ГЁГҐ ГЄГ«ГЁГҐГ­ГІГ  ГЁГ§ Г±ГЇГЁГ±ГЄГ  ГЇГ®Г±ГҐГІГЁГІГҐГ«ГҐГ©
 				names.erase(event.name);
 				namesTables.erase(event.name);
 			}		
@@ -217,21 +217,21 @@ void ComputerClub:: GetValue(const string& filename)
 			break;
 		}
 
-		// проверка формата времени
+		// ГЇГ°Г®ГўГҐГ°ГЄГ  ГґГ®Г°Г¬Г ГІГ  ГўГ°ГҐГ¬ГҐГ­ГЁ
 		if (!isValidTimeFormat(event.time))
 		{
 			file.close();
 			return;
 		}
 
-		// проверка формата последовательности событий
+		// ГЇГ°Г®ГўГҐГ°ГЄГ  ГґГ®Г°Г¬Г ГІГ  ГЇГ®Г±Г«ГҐГ¤Г®ГўГ ГІГҐГ«ГјГ­Г®Г±ГІГЁ Г±Г®ГЎГ»ГІГЁГ©
 		if (event.time < prevTime && !firstClientBeforeOpening)
 		{
 			file.close();
 			return;
 		}
 
-		// проверка формата имени клиента
+		// ГЇГ°Г®ГўГҐГ°ГЄГ  ГґГ®Г°Г¬Г ГІГ  ГЁГ¬ГҐГ­ГЁ ГЄГ«ГЁГҐГ­ГІГ 
 		for (char ch : event.name)
 		{
 			if (!isalnum(ch) && ch != '_' && ch != '-')
@@ -258,9 +258,9 @@ void ComputerClub:: GetValue(const string& filename)
 		names.erase(it);	
 	}
 
-	cout << endTime << endl; // вывод времени конца работы
+	cout << endTime << endl; // ГўГ»ГўГ®Г¤ ГўГ°ГҐГ¬ГҐГ­ГЁ ГЄГ®Г­Г¶Г  Г°Г ГЎГ®ГІГ»
 
-	// вывод выручки
+	// ГўГ»ГўГ®Г¤ ГўГ»Г°ГіГ·ГЄГЁ
 	for (int i = 0; i < numTables; ++i)
 	{
 		int hours = timeTables[i + 1] / 60;
